@@ -6,10 +6,51 @@ public class User {
 
     private final Long id;
     private final UserInfo userInfo;
+    private final UserRelationCounter followingCount; // 팔로잉한 수
+    private final UserRelationCounter followerCount; // 팔로워 수
+
 
     public User(Long id, UserInfo userInfo) {
         this.id = id;
         this.userInfo = userInfo;
+        this.followingCount = new UserRelationCounter();
+        this.followerCount = new UserRelationCounter();
+    }
+
+    //팔로우
+    public void follow(User targetUser) {
+//        this ex)
+//        User userA = new User(1L, ...);
+//        User userB = new User(2L, ...);
+//
+//        userA.follow(userB); // 이때, userA가 this
+
+        if (this.equals(targetUser)) {// 본인이 본인을 팔로우 하면  exception처리
+            throw new IllegalArgumentException();
+        }
+
+        //follow를 동작하는로직
+        followingCount.increase();
+        targetUser.increaseFollowerCount();
+    }
+
+    //언팔로우
+    public void unfollow(User targetUser) {
+        if (this.equals(targetUser)) {
+            throw new IllegalArgumentException();
+        }
+
+        followingCount.decrease();
+        targetUser.decreaseFollowerCount();
+    }
+
+    //캡슐화가 깨지는걸 방지하기 위해 이렇게 메서드 2개 구현
+    private void increaseFollowerCount(){
+        followerCount.increase();
+    }
+
+    private void decreaseFollowerCount(){
+        followerCount.decrease();
     }
 
 
