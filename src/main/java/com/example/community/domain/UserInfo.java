@@ -1,5 +1,6 @@
 package com.example.community.domain;
 
+//이게 vo 이다
 public class UserInfo {
 
     private final String name;
