@@ -1,5 +1,6 @@
 package com.example.community.post.domain;
 
+import com.example.community.common.domain.PositiveIntegerCounter;
 import com.example.community.post.domain.content.PostContent;
 import com.example.community.user.domain.User;
 
@@ -38,7 +39,9 @@ public class Post {
 
     private final PostContent content; // 글내용
 
-    public Post(Long id,User author, PostContent content) {
+    private final PositiveIntegerCounter likeCount;
+
+    public Post(Long id,User author, PostContent content,PositiveIntegerCounter likeCount) {
         if (author == null) {
             throw new IllegalArgumentException();
         }
@@ -46,5 +49,22 @@ public class Post {
         this.id = id;
         this.author = author;
         this.content = content;
+        this.likeCount = likeCount;
     }
+
+    //like 기능
+    // like 기능은 comment에서도 사용하는 공통된 로직이어서 나중에 따로 뽑아서 사용하기
+    public void like(User user) {
+        if (this.author.equals(user)) { // 본인을 본인이 좋아요 누르는걸 방지
+            throw new IllegalArgumentException();
+        }
+
+        likeCount.increase();
+    }
+
+    public void unlike() {
+        likeCount.decrease();
+    }
+
+
 }

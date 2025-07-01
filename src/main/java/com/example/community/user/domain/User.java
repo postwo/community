@@ -1,20 +1,22 @@
 package com.example.community.user.domain;
 
+import com.example.community.common.domain.PositiveIntegerCounter;
+
 import java.util.Objects;
 
 public class User {
 
     private final Long id;
     private final UserInfo userInfo;
-    private final UserRelationCounter followingCount; // 팔로잉한 수
-    private final UserRelationCounter followerCount; // 팔로워 수
+    private final PositiveIntegerCounter followingCount; // 팔로잉한 수
+    private final PositiveIntegerCounter followerCount; // 팔로워 수
 
 
     public User(Long id, UserInfo userInfo) {
         this.id = id;
         this.userInfo = userInfo;
-        this.followingCount = new UserRelationCounter();
-        this.followerCount = new UserRelationCounter();
+        this.followingCount = new PositiveIntegerCounter();
+        this.followerCount = new PositiveIntegerCounter();
     }
 
     //팔로우

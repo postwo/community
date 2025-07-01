@@ -1,9 +1,10 @@
-package com.example.community.user.domain;
+package com.example.community.common.domain;
 
-public class UserRelationCounter {
+// 크게 변경사항이 없을거 같은 경우는 이렇게 공통으로 뽑아주는게 좋다
+public class PositiveIntegerCounter {
     private int count;
 
-    public UserRelationCounter() {
+    public PositiveIntegerCounter() {
         this.count = 0;
     }
 
