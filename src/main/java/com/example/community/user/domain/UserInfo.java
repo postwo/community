@@ -1,4 +1,4 @@
-package com.example.community.domain;
+package com.example.community.user.domain;
 
 //이게 vo 이다
 public class UserInfo {

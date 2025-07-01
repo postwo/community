@@ -1,4 +1,4 @@
-package com.example.community.domain;
+package com.example.community.user.domain;
 
 import java.util.Objects;
 
