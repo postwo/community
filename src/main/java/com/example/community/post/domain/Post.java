@@ -1,5 +1,6 @@
 package com.example.community.post.domain;
 
+import com.example.community.post.domain.content.PostContent;
 import com.example.community.user.domain.User;
 
 public class Post {
