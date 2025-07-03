@@ -45,5 +45,15 @@ public class Comment {
         likeCount.decrease();
     }
 
+    public void updateComment(User user,String updateContent) {
 
+        if (!this.author.equals(user)) {// 내가 작성한 사람이 아니면 발생
+            throw new IllegalArgumentException();
+        }
+
+        this.contet.updateContent(updateContent);
+    }
 }
+
+
+

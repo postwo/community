@@ -2,6 +2,7 @@ package com.example.community.post.domain;
 
 import com.example.community.common.domain.PositiveIntegerCounter;
 import com.example.community.post.domain.content.PostContent;
+import com.example.community.post.domain.content.PostPublicationState;
 import com.example.community.user.domain.User;
 
 public class Post {
@@ -41,6 +42,8 @@ public class Post {
 
     private final PositiveIntegerCounter likeCount;
 
+    private PostPublicationState state;
+
     public Post(Long id,User author, PostContent content,PositiveIntegerCounter likeCount) {
         if (author == null) {
             throw new IllegalArgumentException();
@@ -50,6 +53,7 @@ public class Post {
         this.author = author;
         this.content = content;
         this.likeCount = likeCount;
+        this.state = PostPublicationState.PUBLIC;
     }
 
     //like 기능
@@ -66,5 +70,13 @@ public class Post {
         likeCount.decrease();
     }
 
+    public void updatePost(User user,String updateContent,PostPublicationState state){
+        if (!this.author.equals(user)) { // 내가 글의 작성자가 아닐경우
+            throw new IllegalArgumentException();
+        }
+
+        this.state = state;
+        this.content.updateContent(updateContent);
+    }
 
 }
