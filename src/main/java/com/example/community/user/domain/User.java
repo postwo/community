@@ -13,6 +13,10 @@ public class User {
 
 
     public User(Long id, UserInfo userInfo) {
+        if (userInfo == null) {
+            throw new IllegalArgumentException();
+        }
+
         this.id = id;
         this.userInfo = userInfo;
         this.followingCount = new PositiveIntegerCounter();
@@ -46,6 +50,10 @@ public class User {
         targetUser.decreaseFollowerCount();
     }
 
+    //이거를 private으로 만든이유는 이객체를 사용하는 클라이언트에서 이 메서드를 사용하지 마라라는 의미를 담고 있다
+    //즉 클라이언트는 private 메서드를 존재를 아에 몰라야 한다
+    //하지만 이런것들이 테스트 때문에 노출하게 되면 노출이 된 테스트코드 유지보수가 어렵게 변한다
+    //내부 객체들 까지 코드의 결합이 되었기 때문에 캡슐화가 어려워진다
     //캡슐화가 깨지는걸 방지하기 위해 이렇게 메서드 2개 구현
     private void increaseFollowerCount(){
         followerCount.increase();
