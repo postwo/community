@@ -43,6 +43,7 @@ public class User {
     //언팔로우
     public void unfollow(User targetUser) {
         if (this.equals(targetUser)) {
+            // ex) this(userA를 뜻한다)는 즉 userA.equals(userB) 수행!
             throw new IllegalArgumentException();
         }
 
