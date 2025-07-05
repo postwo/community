@@ -81,4 +81,16 @@ public class User {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int followerCount() {
+        return followerCount.getCount();
+    }
+
+    public int followingCount() {
+        return followingCount.getCount();
+    }
 }
