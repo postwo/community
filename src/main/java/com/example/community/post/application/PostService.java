@@ -1,7 +1,7 @@
 package com.example.community.post.application;
 
 import com.example.community.post.application.dto.CreatePostRequestDto;
-import com.example.community.post.application.dto.LikePostRequestDto;
+import com.example.community.post.application.dto.LikeRequestDto;
 import com.example.community.post.application.interfaces.LikeRepository;
 import com.example.community.post.application.interfaces.PostRepository;
 import com.example.community.post.domain.Post;
@@ -41,8 +41,8 @@ public class PostService {
     }
 
     //like
-    public void likePost(LikePostRequestDto dto) {
-        Post post = getPost(dto.postId());
+    public void likePost(LikeRequestDto dto) {
+        Post post = getPost(dto.targetId());
         User user = userService.getUser(dto.userId());
 
         // 좋아요를 이미 한번 했는데 또 눌러지는걸 방지
@@ -55,8 +55,8 @@ public class PostService {
     }
 
     //unlike
-    public void unlikePost(LikePostRequestDto dto) {
-        Post post = getPost(dto.postId());
+    public void unlikePost(LikeRequestDto dto) {
+        Post post = getPost(dto.targetId());
         User user = userService.getUser(dto.userId());
 
         // 좋아요 한개 있을경우 동작
