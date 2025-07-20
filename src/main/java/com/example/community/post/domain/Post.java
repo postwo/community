@@ -1,6 +1,7 @@
 package com.example.community.post.domain;
 
 import com.example.community.common.domain.PositiveIntegerCounter;
+import com.example.community.post.domain.content.Content;
 import com.example.community.post.domain.content.PostContent;
 import com.example.community.post.domain.content.PostPublicationState;
 import com.example.community.user.domain.User;
@@ -38,13 +39,31 @@ public class Post {
     /*이방식은 위에 내용과 반대로 생각하면 된단 */
 //    private final Long authorId;
 
-    private final PostContent content; // 글내용
+    private final Content content; // 글내용
 
     private final PositiveIntegerCounter likeCount;
 
     private PostPublicationState state;
 
-    public Post(Long id,User author, PostContent content) {
+
+
+    // 정적 생성자 메소드를 통해서 어떤 생성자를 사용하는지 한번 더 메소드명으로 알려주기 때문에 유지보수가 쉽다
+    // 그리고 테스트할때도 편하다 그러므로 정적(static) 생성자를 만들어서 사용하는걸 추천
+    public static Post createPost(Long id,User author, String content,PostPublicationState state) {
+        return new Post(id,author,new PostContent(content),state);
+    }
+
+    // 정적 생성자
+    public static Post createPost(User author, String content) {
+        return new Post(null,author,new PostContent(content),PostPublicationState.PUBLIC);
+    }
+
+    // 생성자를 하나더 만든이유는 테스트용도로 사용하기 위해서 왜냐하면 테스트에서는 상태값을 내가 지정해서 사용하고 싶기 때문에
+    public Post(Long id,User author, Content content) {
+        this(id,author,content,PostPublicationState.PUBLIC);
+    }
+
+    public Post(Long id,User author, Content content,PostPublicationState state) {
         if (author == null) {
             throw new IllegalArgumentException();
         }
@@ -53,7 +72,7 @@ public class Post {
         this.author = author;
         this.content = content;
         this.likeCount = new PositiveIntegerCounter();
-        this.state = PostPublicationState.PUBLIC;
+        this.state = state;
     }
 
 
