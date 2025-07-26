@@ -1,19 +1,15 @@
 package com.example.community.user.application;
 
+import com.example.community.fake.FakeObjectFactory;
 import com.example.community.user.application.dto.CreateUserRepositoryDto;
-import com.example.community.user.application.interfaces.UserRepository;
 import com.example.community.user.domain.User;
 import com.example.community.user.domain.UserInfo;
-import com.example.community.user.repository.FakeUserRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserServiceTest {
-
-    private final UserRepository userRepository = new FakeUserRepository() ;
-
-    private final UserService userService = new UserService(userRepository);
+    private final UserService userService = FakeObjectFactory.getUserService();
 
     @Test
     public void givenUserInfoDto_whenCreateUser_thenCanFindUser() {
