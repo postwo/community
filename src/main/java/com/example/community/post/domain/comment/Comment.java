@@ -20,7 +20,7 @@ public class Comment {
     }
 
 
-    public Comment (Long id, Post post, User author, Content content) {
+    public Comment (Long id, Post post, User author, Content contents) {
         if (author == null) {
             throw new IllegalArgumentException();
         }
@@ -29,14 +29,14 @@ public class Comment {
             throw new IllegalArgumentException();
         }
 
-        if (contet == null) {
+        if (contents == null) {
             throw new IllegalArgumentException();
         }
 
         this.id = id;
         this.post = post;
         this.author = author;
-        this.contet = contet;
+        this.contet = contents;
         this.likeCount = new PositiveIntegerCounter(); // 0으로 초기화 해주기 위해 객체 생성
     }
 
